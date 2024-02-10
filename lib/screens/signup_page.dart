@@ -2,8 +2,15 @@ import 'package:brainburst/screens/login_page.dart';
 import 'package:brainburst/screens/reward_pages/try_again.dart';
 import 'package:flutter/material.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  bool seePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +122,15 @@ class SignupPage extends StatelessWidget {
                             ),
                           ),
                           child: TextField(
+                            obscureText: seePassword,
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock_open),
                                 suffixIcon: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        seePassword = !seePassword;
+                                      });
+                                    },
                                     icon: const Icon(Icons.remove_red_eye)),
                                 hintText: "Enter your password",
                                 hintStyle: TextStyle(
@@ -144,7 +156,10 @@ class SignupPage extends StatelessWidget {
                           ),
                           child: MaterialButton(
                             onPressed: () => {
-                              Navigator.push(context,MaterialPageRoute(builder: (context)=>const TryAgain()))  
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const TryAgain()))
                             },
                             child: const Padding(
                               padding: EdgeInsets.only(

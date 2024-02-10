@@ -2,8 +2,15 @@ import 'package:brainburst/screens/index_page.dart';
 import 'package:brainburst/screens/signup_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var seePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +97,13 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           child: TextField(
+                            obscureText: seePassword,
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock_open),
                                 suffixIcon: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {setState(() {
+                                      seePassword= !seePassword;
+                                    });},
                                     icon: const Icon(Icons.remove_red_eye)),
                                 hintText: "Enter your password",
                                 hintStyle: TextStyle(
@@ -120,9 +130,10 @@ class LoginPage extends StatelessWidget {
                           child: MaterialButton(
                             onPressed: () {
                               Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => const IndexPage())));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const IndexPage())));
                             },
                             child: const Padding(
                               padding: EdgeInsets.only(
@@ -145,7 +156,8 @@ class LoginPage extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: ((context) => const SignupPage())));
+                                    builder: ((context) =>
+                                        const SignupPage())));
                           },
                           child: Text.rich(
                             TextSpan(
